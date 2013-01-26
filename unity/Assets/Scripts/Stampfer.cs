@@ -10,6 +10,8 @@ public class Stampfer : MonoBehaviour {
 	CharacterConnection m_Character;
 	[SerializeField]Animation m_Animation;
 	
+	[SerializeField] AudioClip m_stompSound;
+	
 	bool m_isUp = true;
 	
 	public void Init(float stampOffset)
@@ -60,6 +62,10 @@ public class Stampfer : MonoBehaviour {
 		if(!m_isUp && !m_Animation.isPlaying) {
 			m_Animation.Play ("up");
 			m_isUp = true;
+			
+			// Play stomp sound, since we just arrived at the bottom.
+			if ( GetComponentInChildren<Renderer>().isVisible )
+				SoundManager.Instance.PlaySound( m_stompSound );
 		}
 	}
 	

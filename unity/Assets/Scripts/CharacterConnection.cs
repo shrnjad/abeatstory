@@ -1,4 +1,4 @@
-//#define CHEAT
+#define CHEAT
 
 using UnityEngine;
 using System.Collections;
@@ -118,7 +118,7 @@ public class CharacterConnection : MonoBehaviour {
 		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		
 		// Play death sound.
-		SoundManager.Instance.PlayFrankSound( m_dieClip );
+		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();
 	}
 }

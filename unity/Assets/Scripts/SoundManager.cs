@@ -3,8 +3,8 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
 	
-	[SerializeField]AudioSource m_Source;
-	[SerializeField]AudioSource m_FrankSource;
+	[SerializeField]AudioSource m_MusicSource;
+	[SerializeField]AudioSource m_SoundSource;
 	
 	[SerializeField]AudioClip m_MainTheme;
 	[SerializeField]AudioClip m_GameTheme;
@@ -29,30 +29,29 @@ public class SoundManager : MonoBehaviour {
 	{
 		if(m_nextClip != null)
 		{
-			m_Source.volume -= Time.deltaTime*2f;
-			if(m_Source.volume <= 0)
+			m_MusicSource.volume -= Time.deltaTime*2f;
+			if(m_MusicSource.volume <= 0)
 			{
-				m_Source.volume =0;
-				m_Source.clip = m_nextClip;
-				m_Source.Play ();
+				m_MusicSource.volume =0;
+				m_MusicSource.clip = m_nextClip;
+				m_MusicSource.Play ();
 				m_nextClip = null;
 			}
 		}
-		else if(m_Source.volume < 1)
-			m_Source.volume += Time.deltaTime*2f;
+		else if(m_MusicSource.volume < 1)
+			m_MusicSource.volume += Time.deltaTime*2f;
 		
 	}
 	
 	public void StopMusic() {
 		m_nextClip = null;
-		m_Source.Stop();
+		m_MusicSource.Stop();
 	}
 	
-	public void PlayFrankSound( AudioClip clip ) {
+	public void PlaySound( AudioClip clip ) {
 		if ( clip == null ) return;
 		
-		m_FrankSource.clip = clip;
-		m_FrankSource.Play();
+		m_SoundSource.PlayOneShot( clip );
 	}
 	
 }
