@@ -12,6 +12,12 @@ public class CharacterConnection : MonoBehaviour {
 	[SerializeField] CharacterController m_character;
 	[SerializeField] BreathbarController m_heartBar;
 	 private bool m_playerDead = false;
+	[SerializeField] Color m_StandardColor;
+	[SerializeField] Color m_LowColor;
+	[SerializeField] Color m_HighColor;
+	Color m_currentColor;
+	float m_lowTimer=0f;
+	
 	
 	private static CharacterConnection _instance;
 	public static CharacterConnection Instance {get {return _instance; }}
@@ -31,9 +37,24 @@ public class CharacterConnection : MonoBehaviour {
 			return;
 #endif			
 		}
-		m_character.SimpleMove(new Vector3((m_heartBar.GetSpeed()*20f)*Time.deltaTime,0,0));
+		float speed = m_heartBar.GetSpeed()*20f;
+		if(speed <= 0)
+			m_lowTimer+= Time.deltaTime;
+		else 
+			m_lowTimer =0;
+		m_character.SimpleMove(new Vector3(speed*Time.deltaTime,-100,0));
 		m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
 		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
+		
+		if(m_lowTimer > 0)
+		{
+			if(m_lowTimer >= 1)
+				m_playerDead = true;
+			m_currentColor = Color.Lerp (m_StandardColor,m_LowColor,m_lowTimer);
+		}
+		else 
+			m_currentColor = m_StandardColor;
+		renderer.material.color = m_currentColor;
 	}
 	
 	/*	public void OnCollisionEnter (Collision hit)
