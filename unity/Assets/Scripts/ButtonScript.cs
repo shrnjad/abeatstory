@@ -23,6 +23,7 @@ public class ButtonScript : MonoBehaviour
 	
 	public void OnMouseUpAsButton()
 	{
+		Debug.Log ("call " + m_CallbackFunction);
 		SoundManager.Instance.PlaySound(m_SFX);
 		m_CallbackScript.SendMessage(m_CallbackFunction);
 	}
