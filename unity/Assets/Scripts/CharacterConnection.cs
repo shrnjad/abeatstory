@@ -1,4 +1,4 @@
-#define CHEAT
+//#define CHEAT
 
 using UnityEngine;
 using System.Collections;
@@ -71,7 +71,7 @@ public class CharacterConnection : MonoBehaviour {
 		if(m_lowTimer > 0)
 		{
 			if(m_lowTimer >= 1)
-				m_playerDead = true;
+				PlayerDeath();
 			m_currentColor = Color.Lerp (m_StandardColor, m_LowColor, m_lowTimer);
 		}
 		else if ( m_heartHightValue > 0 )
@@ -79,7 +79,8 @@ public class CharacterConnection : MonoBehaviour {
 			// Set high risk color.
 			m_currentColor = Color.Lerp( m_StandardColor, m_HighColor, m_heartHightValue );
 			
-			if ( m_heartHightValue > .999f ) m_playerDead = true;
+			if ( m_heartHightValue > .999f ) 
+				PlayerDeath();
 		}
 		else 
 			m_currentColor = m_StandardColor;
@@ -97,7 +98,7 @@ public class CharacterConnection : MonoBehaviour {
 */	
 	public void OnTriggerEnter(Collider col)
 	{
-		m_playerDead = true;
+		PlayerDeath();
 	}
 	
 	public void OnGUI()
@@ -112,5 +113,6 @@ public class CharacterConnection : MonoBehaviour {
 	public void PlayerDeath()
 	{
 		m_playerDead = true;
+		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 	}
 }
