@@ -7,14 +7,18 @@ public class LevelCreation : MonoBehaviour {
 	[SerializeField] Transform m_Player;
 	[SerializeField] GameObject m_Stampfer;
 	[SerializeField] GameObject[] m_Ground;
+	[SerializeField] GameObject[] m_Background;
 	
 	List<GameObject> m_objectList = new List<GameObject>();
 	List<GameObject> m_groundObjectList = new List<GameObject>();
+	List<GameObject> m_backgroundObjectList = new List<GameObject>();
+	
 	
 	int objectCount = 0;
 	float objectDistance = 25;
 	Vector3 nextObjectPosition = new Vector3(15,0,2);
 	Vector3 lastGroundPos = Vector3.zero;
+	Vector3 lastBackgroundPosition;
 	int groundIndex;
 	int tilesTillNextPartCheck;
 	// Use this for initialization
@@ -24,8 +28,27 @@ public class LevelCreation : MonoBehaviour {
 		tilesTillNextPartCheck = 30;
 		nextObjectPosition = new Vector3(20,0,0);
 		for(int i=0;i<20;i++)
+		{
 			CreateGround();
+			CreateBackground();
+		}
+	}
+	
+	private void CreateBackground()
+	{
+		GameObject go = Instantiate (m_Background[0]) as GameObject;
+		go.transform.position = lastBackgroundPosition;
+		lastBackgroundPosition = go.transform.Find ("End").position;
+		m_backgroundObjectList.Add (go);
 		
+		GameObject detailGo;
+		int index = Random.Range(0,100)%10+1;
+		if(index < m_Background.Length)
+		{
+			detailGo = GameObject.Instantiate(m_Background[index]) as GameObject;
+			detailGo.transform.position = go.transform.position;
+			m_backgroundObjectList.Add (detailGo);
+		}
 	}
 	
 	private void CreateGround()
@@ -69,7 +92,7 @@ public class LevelCreation : MonoBehaviour {
 	{
 			//GameObject go = ObjectPool.Instance.SetObject(m_Stampfer,pos + new Vector3 (0,0,2));
 			GameObject go = Instantiate(m_Stampfer) as GameObject;
-			go.transform.position = pos + new Vector3 (0,0,2);
+			go.transform.position = pos;
 			nextObjectPosition = pos + new Vector3(Random.Range(5,objectDistance),0,0);
 			objectCount++;
 			if(objectDistance > 10)
@@ -96,18 +119,35 @@ public class LevelCreation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(m_Player.position.x-30 > m_objectList[0].transform.position.x)
+		if(m_objectList.Count > 0)
 		{
-			Destroy(m_objectList[0]);
-			m_objectList.RemoveAt(0);
-			
+			if(m_Player.position.x-30 > m_objectList[0].transform.position.x)
+			{
+				Destroy(m_objectList[0]);
+				m_objectList.RemoveAt(0);
+				
+			}
 		}
-		if(m_Player.position.x-30 > m_groundObjectList[0].transform.position.x)
+		if(m_groundObjectList.Count > 0)
 		{
-			Destroy(m_groundObjectList[0]);
-			m_groundObjectList.RemoveAt(0);
-			CreateGround();
-			
+			if(m_Player.position.x-30 > m_groundObjectList[0].transform.position.x)
+			{
+				Destroy(m_groundObjectList[0]);
+				m_groundObjectList.RemoveAt(0);
+				CreateGround();
+				
+			}
+		}
+		if(m_backgroundObjectList.Count > 0)
+		{
+			if(m_Player.position.x-30 > m_backgroundObjectList[0].transform.position.x)
+			{
+				Destroy(m_backgroundObjectList[0]);
+				m_backgroundObjectList.RemoveAt(0);
+				CreateBackground();
+				
+			}
 		}
 	}
+	
 }

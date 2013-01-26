@@ -31,8 +31,7 @@ public class CharacterConnection : MonoBehaviour {
 			return;
 #endif			
 		}
-		m_character.SimpleMove(new Vector3(m_heartBar.GetSpeed()*20f*Time.deltaTime,0,0));
-		//rigidbody.velocity = new Vector3(m_heartBar.GetSpeed()*20f*Time.deltaTime,-1,0);
+		m_character.SimpleMove(new Vector3((m_heartBar.GetSpeed()*20f)*Time.deltaTime,0,0));
 		m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
 		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
 	}
