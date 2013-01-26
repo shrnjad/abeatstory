@@ -108,7 +108,7 @@ public class CharacterConnection : MonoBehaviour {
 		if(m_playerDead)
 		{
 			if(GUI.Button (new Rect (50,50,200,100),"RESTART"))
-				Application.LoadLevel(0);
+				Application.LoadLevel("runner 1");
 		}
 	}
 	
