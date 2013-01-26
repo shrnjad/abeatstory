@@ -30,6 +30,7 @@ public class CharacterConnection : MonoBehaviour {
 	[SerializeField]Renderer m_renderer;
 	private float lastButtomPress;
 	private bool started = false;
+	[SerializeField] ParticleSystem m_ParticleSystem;
 	
 	public bool isAlive {
 		get { return !m_playerDead; }
@@ -75,6 +76,7 @@ public class CharacterConnection : MonoBehaviour {
 		}
 		if(Input.GetMouseButtonUp(0) )
 		{
+			m_ParticleSystem.Play();
 			lastButtomPress = Time.time;
 			if(animation.clip.name != "shock")
 			{
