@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 	[SerializeField] Transform m_HighscoreButtons;
 	[SerializeField] Transform m_CreditsButtons;
 	
+	[SerializeField] TextMesh[] m_HighscoreBoardText;
+	
 	private bool AnimateHighscoreButtons = false;
 	Vector3 HighscoreDelta;
 	Vector3 MenuDelta;
@@ -31,6 +33,15 @@ public class MainMenu : MonoBehaviour
 		
 		oneAnim = m_HighscoreButtons;
 		twoAnim = m_MainMenuButtons;
+		
+		string[] m_HighscoreValues = new string[5];
+		for(int i=0;i<5;i++)
+		{
+			m_HighscoreValues[i] = PlayerPrefs.GetInt ("highscore_values_"+i.ToString (),0).ToString ();
+			m_HighscoreBoardText[i].text = (i+1).ToString ()+". " + m_HighscoreValues[i];
+		}
+			
+		
 
 		InitAnimValues();
 	}
