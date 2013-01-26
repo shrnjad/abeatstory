@@ -22,8 +22,6 @@ public class HeartMeterArrow : MonoBehaviour {
 		float barStatus = m_Character.GetDeathTimers();
 		float rotation = barStatus*-90f;
 		
-		Debug.Log ("barStatus :" + barStatus + "    rotation " + rotation);
-		
 		Arrow.transform.localRotation = m_StartRotation;
 		Arrow.transform.Rotate(0,0,rotation);
 	

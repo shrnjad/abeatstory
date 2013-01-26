@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour {
 	AudioClip m_nextClip;
 	// Use this for initialization
 	void Awake () {
+		//PlayerPrefs.DeleteAll();
+
 		_instance = this;
 		DontDestroyOnLoad(gameObject);
 		SwitchToMenuTheme();

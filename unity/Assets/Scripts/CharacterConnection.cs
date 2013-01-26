@@ -177,6 +177,7 @@ public class CharacterConnection : MonoBehaviour {
 		// Play death sound.
 		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();
+		animation.CrossFade ("Die");
 		SaveHighscore((int)transform.position.x);
 	}
 	
