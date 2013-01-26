@@ -1,6 +1,10 @@
+//#define CHEAT
+
 using UnityEngine;
 using System.Collections;
 using System;
+
+
 
 public class CharacterConnection : MonoBehaviour {
 	
@@ -20,15 +24,20 @@ public class CharacterConnection : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(m_playerDead)
+		{
+#if CHEAT 
+			m_playerDead = false;
+#else 
 			return;
-		
+#endif			
+		}
 		m_character.SimpleMove(new Vector3(m_heartBar.GetSpeed()*20f*Time.deltaTime,0,0));
 		//rigidbody.velocity = new Vector3(m_heartBar.GetSpeed()*20f*Time.deltaTime,-1,0);
-		//m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
-		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-10,-4,10);
+		m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
+		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
 	}
 	
-/*	public void OnCollisionEnter (Collision hit)
+	/*	public void OnCollisionEnter (Collision hit)
 	{
 		if(hit.gameObject.name.Contains("Stampfer"))
 		{
