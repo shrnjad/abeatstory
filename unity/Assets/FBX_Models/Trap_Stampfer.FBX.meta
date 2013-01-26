@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: 3a24a667e7379f54794428f8bed3b542
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Wood_Beam_A
+    100004: Wood_Beam_A001
+    100006: Wood_Beam_A002
+    100008: Wood_Beam_A003
+    100010: Wood_Beam_A004
+    100012: Wood_Beam_A005
+    400000: //RootNode
+    400002: Wood_Beam_A
+    400004: Wood_Beam_A001
+    400006: Wood_Beam_A002
+    400008: Wood_Beam_A003
+    400010: Wood_Beam_A004
+    400012: Wood_Beam_A005
+    2300000: //RootNode
+    2300002: Wood_Beam_A
+    2300004: Wood_Beam_A001
+    2300006: Wood_Beam_A002
+    2300008: Wood_Beam_A003
+    2300010: Wood_Beam_A004
+    2300012: Wood_Beam_A005
+    3300000: //RootNode
+    3300002: Wood_Beam_A
+    3300004: Wood_Beam_A001
+    3300006: Wood_Beam_A002
+    3300008: Wood_Beam_A003
+    3300010: Wood_Beam_A004
+    3300012: Wood_Beam_A005
+    4300000: Stone
+    4300002: Wood_Beam_A001
+    4300004: Wood_Beam_A002
+    4300006: Wood_Beam_A003
+    4300008: Wood_Beam_A004
+    4300010: Wood_Beam_A005
+    4300012: Wood_Beam_A
+    4300014: Trap_Stampfer
+    7400000: down
+    7400002: up
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .300000012
+    animationPositionError: .300000012
+    animationScaleError: .300000012
+    animationWrapMode: 0
+    clipAnimations:
+    - name: down
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 35
+      wrapMode: 8
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    - name: up
+      takeName: Take 001
+      firstFrame: 35
+      lastFrame: 50.0000038
+      wrapMode: 8
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      keepAdditionalBonesAnimation: 1
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      skeletonMaskElements: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 
