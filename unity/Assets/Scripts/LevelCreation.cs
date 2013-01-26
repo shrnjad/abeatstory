@@ -6,6 +6,7 @@ public class LevelCreation : MonoBehaviour {
 	
 	[SerializeField] Transform m_Player;
 	[SerializeField] GameObject m_Stampfer;
+	[SerializeField] GameObject m_Bridge;
 	[SerializeField] GameObject[] m_Ground;
 	[SerializeField] GameObject[] m_Background;
 	
@@ -106,6 +107,9 @@ public class LevelCreation : MonoBehaviour {
 		{
 			tilesTillNextPartCheck = Random.Range (2,6);
 		}
+	}
+	
+	private void CreateBridge( Vector3 pos ) {
 	}
 		
 	private Stampfer CreateStampfer(Vector3 pos, float stampTime = -1f)
