@@ -10,6 +10,11 @@ public class BreathbarController : MonoBehaviour {
 	[SerializeField] Texture m_barBackgroundTexture;
 	[SerializeField] Texture m_barForegroundTexture;	
 	[SerializeField] AnimationCurve m_SpeedCurve;
+	
+	public float maxValue {
+		get { return m_MaxValue; }
+	}
+	
 	// Use this for initialization
 	void Start () 
 	{

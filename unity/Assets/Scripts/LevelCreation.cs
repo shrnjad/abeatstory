@@ -30,7 +30,7 @@ public class LevelCreation : MonoBehaviour {
 		for(int i=0;i<20;i++)
 		{
 			CreateGround();
-			CreateBackground();
+			//CreateBackground();
 		}
 	}
 	
@@ -58,9 +58,29 @@ public class LevelCreation : MonoBehaviour {
 		
 		GameObject go = Instantiate(m_Ground[groundIndex]) as GameObject;
 		go.transform.position = lastGroundPos;
-		lastGroundPos = go.transform.Find ("End").position;
 		m_groundObjectList.Add (go);
+		
+		
+		if(groundIndex == 0)
+		{
+			GameObject goBack = Instantiate (m_Background[0]) as GameObject;
+			goBack.transform.position = lastGroundPos;
+			//lastBackgroundPosition = go.transform.Find ("End").position;
+			m_backgroundObjectList.Add (goBack);
+			
+			GameObject detailGo;
+			int index = Random.Range(0,100)%10+1;
+			if(index < m_Background.Length)
+			{
+				detailGo = GameObject.Instantiate(m_Background[index]) as GameObject;
+				detailGo.transform.position = go.transform.position;
+				m_backgroundObjectList.Add (detailGo);
+			}
+		}
+		
 		tilesTillNextPartCheck--;
+		lastGroundPos = go.transform.Find ("End").position;
+
 		if(lastGroundPos.x > nextObjectPosition.x && groundIndex == 0)
 		{
 			if(tilesTillNextPartCheck > 4 && Random.Range(0,3) == 0)
@@ -144,7 +164,7 @@ public class LevelCreation : MonoBehaviour {
 			{
 				Destroy(m_backgroundObjectList[0]);
 				m_backgroundObjectList.RemoveAt(0);
-				CreateBackground();
+				//CreateBackground();
 				
 			}
 		}
