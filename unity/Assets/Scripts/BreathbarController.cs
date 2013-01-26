@@ -52,12 +52,13 @@ public class BreathbarController : MonoBehaviour {
 			m_currentValue = m_MaxValue;
 	}
 	
-	
+/*	
 	public void OnGUI()
 	{
 		float curveValue = m_SpeedCurve.Evaluate((m_currentValue / m_MaxValue));
 		GUI.DrawTexture(new Rect(10,10,300,20),m_barBackgroundTexture);
 		//GUI.DrawTexture (new Rect(10+300*curveValue-5,10,10,20),m_barForegroundTexture);
 		GUI.DrawTexture (new Rect(10+300*(m_currentValue / m_MaxValue)-5,10,10,20),m_barForegroundTexture);
-	}	
+	}
+	*/	
 }

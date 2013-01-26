@@ -37,7 +37,9 @@ public class LevelCreation : MonoBehaviour {
 	
 	private void CreateBridge()
 	{
-			Debug.LogError ("Instant Bridge");
+			if(m_Player.position.x < 15)
+				return;
+		
 			GameObject go = Instantiate(m_Ground[3]) as GameObject;
 			go.transform.position = lastGroundPos + (go.transform.position - go.transform.Find ("Start").position);//+ new Vector3(0,-1,1));
 			m_groundObjectList.Add (go);
@@ -124,8 +126,6 @@ public class LevelCreation : MonoBehaviour {
 		if(groundIndex > 3)
 			groundIndex = 3;
 		
-		Debug.LogError ("groundIndex is " + groundIndex);
-		
 		if(groundIndex == 0)
 		{
 			tilesTillNextPartCheck = Random.Range (15,30);
@@ -136,7 +136,6 @@ public class LevelCreation : MonoBehaviour {
 		}
 		else if(groundIndex == 3)
 		{
-			Debug.Log ("BRidge index :) :) ");
 			tilesTillNextPartCheck = 0;
 		}
 	}
