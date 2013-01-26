@@ -1,4 +1,4 @@
-#define CHEAT
+//#define CHEAT
 
 using UnityEngine;
 using System.Collections;
@@ -28,6 +28,10 @@ public class CharacterConnection : MonoBehaviour {
 	public static CharacterConnection Instance {get {return _instance; }}
 	
 	[SerializeField]Renderer m_renderer;
+	
+	public bool isAlive {
+		get { return !m_playerDead; }
+	}
 	
 	public void Awake()
 	{
@@ -101,15 +105,6 @@ public class CharacterConnection : MonoBehaviour {
 	public void OnTriggerEnter(Collider col)
 	{
 		PlayerDeath();
-	}
-	
-	public void OnGUI()
-	{
-		if(m_playerDead)
-		{
-			if(GUI.Button (new Rect (50,50,200,100),"RESTART"))
-				Application.LoadLevel("runner 1");
-		}
 	}
 	
 	public void PlayerDeath()
