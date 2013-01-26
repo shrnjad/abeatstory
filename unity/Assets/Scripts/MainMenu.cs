@@ -5,6 +5,8 @@ public class MainMenu : MonoBehaviour
 {
 	public void StartGame()
 	{
+		SoundManager.Instance.SwitchToGameTheme();
+
 		Application.LoadLevel ("runner 1");
 	}
 	

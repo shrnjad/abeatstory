@@ -10,6 +10,7 @@ public class ButtonScript : MonoBehaviour
 	[SerializeField] MonoBehaviour m_CallbackScript;
 	[SerializeField] string m_CallbackFunction;
 	
+	[SerializeField] AudioClip m_SFX;
 	public void OnMouseEnter()
 	{
 		tex.material.mainTexture = hoverCol;
@@ -22,6 +23,7 @@ public class ButtonScript : MonoBehaviour
 	
 	public void OnMouseUpAsButton()
 	{
+		SoundManager.Instance.PlaySound(m_SFX);
 		m_CallbackScript.SendMessage(m_CallbackFunction);
 	}
 }

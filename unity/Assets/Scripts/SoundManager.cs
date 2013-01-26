@@ -17,12 +17,18 @@ public class SoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		_instance = this;
-		SwitchToGameTheme();
+		DontDestroyOnLoad(gameObject);
+		SwitchToMenuTheme();
+		Application.LoadLevel("Menu");
 	}
 	
 	public void SwitchToGameTheme()
 	{
 		m_nextClip = m_GameTheme;	
+	}
+	public void SwitchToMenuTheme()
+	{
+		m_nextClip = m_MainTheme;	
 	}
 	
 	public void Update()
