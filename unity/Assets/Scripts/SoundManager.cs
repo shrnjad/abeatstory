@@ -42,4 +42,17 @@ public class SoundManager : MonoBehaviour {
 			m_Source.volume += Time.deltaTime*2f;
 		
 	}
+	
+	public void StopMusic() {
+		m_nextClip = null;
+		m_Source.Stop();
+	}
+	
+	public void PlayFrankSound( AudioClip clip ) {
+		if ( clip == null ) return;
+		
+		m_FrankSource.clip = clip;
+		m_FrankSource.Play();
+	}
+	
 }

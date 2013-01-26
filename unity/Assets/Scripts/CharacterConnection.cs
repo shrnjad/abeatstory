@@ -22,6 +22,8 @@ public class CharacterConnection : MonoBehaviour {
 	[SerializeField] float m_HeartHighAdd = .05f;
 	private float m_heartHightValue = 0;
 	
+	[SerializeField] AudioClip m_dieClip;
+	
 	private static CharacterConnection _instance;
 	public static CharacterConnection Instance {get {return _instance; }}
 	
@@ -116,5 +118,7 @@ public class CharacterConnection : MonoBehaviour {
 		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		
 		// Play death sound.
+		SoundManager.Instance.PlayFrankSound( m_dieClip );
+		SoundManager.Instance.StopMusic();
 	}
 }
