@@ -11,6 +11,8 @@ public class BreathbarController : MonoBehaviour {
 	[SerializeField] Texture m_barForegroundTexture;	
 	[SerializeField] AnimationCurve m_SpeedCurve;
 	
+	bool started = false;
+	
 	public float maxValue {
 		get { return m_MaxValue; }
 	}
@@ -31,6 +33,14 @@ public class BreathbarController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(!started)
+		{
+			if(Input.GetMouseButtonUp(0))
+				started = true;
+			return;
+		}
+		
+		
 		m_currentValue -= m_ReductionPerSecond * Time.deltaTime;
 	
 		if(Input.GetMouseButtonUp(0))

@@ -35,6 +35,17 @@ public class LevelCreation : MonoBehaviour {
 		}
 	}
 	
+	private void CreateBridge()
+	{
+			Debug.LogError ("Instant Bridge");
+			GameObject go = Instantiate(m_Ground[3]) as GameObject;
+			go.transform.position = lastGroundPos + (go.transform.position - go.transform.Find ("Start").position);//+ new Vector3(0,-1,1));
+			m_groundObjectList.Add (go);
+			lastGroundPos = go.transform.Find ("End").position;//- new Vector3(0,-1,1);
+			//tilesTillNextPartCheck=0;
+
+	}
+	
 	private void CreateBackground()
 	{
 		GameObject go = Instantiate (m_Background[0]) as GameObject;
@@ -57,13 +68,22 @@ public class LevelCreation : MonoBehaviour {
 		if(tilesTillNextPartCheck <=0)
 			CheckNewTileType();
 		
-		GameObject go = Instantiate(m_Ground[groundIndex]) as GameObject;
-		//GameObject go = Instantiate(m_Bridge) as GameObject;
+		GameObject go = null;
+		if(groundIndex == 3)
+		{
+			CreateBridge ();
+			return;
+		}
+		if(tilesTillNextPartCheck > 2)
+			if(Random.Range (0,15) == 0)
+			{
+				CreateBridge();
+				return;
+			}
+		
+		go = Instantiate(m_Ground[groundIndex]) as GameObject;
 		go.transform.position = lastGroundPos;
 		m_groundObjectList.Add (go);
-		//lastGroundPos = go.transform.Find ("End").position;
-		
-		//return;
 		
 		if(groundIndex == 0)
 		{
@@ -99,8 +119,12 @@ public class LevelCreation : MonoBehaviour {
 		if(groundIndex > 0)
 			groundIndex = 0;
 		else 
-			groundIndex = Random.Range (0,3);
+			groundIndex = Random.Range (1,5);
 		
+		if(groundIndex > 3)
+			groundIndex = 3;
+		
+		Debug.LogError ("groundIndex is " + groundIndex);
 		
 		if(groundIndex == 0)
 		{
@@ -109,6 +133,11 @@ public class LevelCreation : MonoBehaviour {
 		else if(groundIndex <= 2 )
 		{
 			tilesTillNextPartCheck = Random.Range (2,6);
+		}
+		else if(groundIndex == 3)
+		{
+			Debug.Log ("BRidge index :) :) ");
+			tilesTillNextPartCheck = 0;
 		}
 	}
 	

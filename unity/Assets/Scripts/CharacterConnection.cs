@@ -1,4 +1,4 @@
-#define CHEAT
+//#define CHEAT
 
 using UnityEngine;
 using System.Collections;
@@ -28,14 +28,43 @@ public class CharacterConnection : MonoBehaviour {
 	public static CharacterConnection Instance {get {return _instance; }}
 	
 	[SerializeField]Renderer m_renderer;
+	private float lastButtomPress;
+	private bool started = false;
+	
+	public bool isAlive {
+		get { return !m_playerDead; }
+	}
 	
 	public void Awake()
 	{
 		_instance = this;
+		transform.Translate(0,-1.8f,0);
+		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
+		rigidbody.Sleep();
+	}
+	
+	public float GetDeathTimers()
+	{
+		if(m_heartHightValue > 0)
+			return m_heartHightValue;
+		else if(m_lowTimer > 0)
+			return - m_lowTimer;
+		else return 0;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		if(!started)
+		{
+			if(Input.GetMouseButtonUp(0))
+			{
+				rigidbody.WakeUp ();
+				started = true;
+			}
+			return;
+		}
+		
 		if(m_playerDead)
 		{
 #if CHEAT 
@@ -44,8 +73,43 @@ public class CharacterConnection : MonoBehaviour {
 			return;
 #endif			
 		}
-		if(!animation.isPlaying)
+		if(Input.GetMouseButtonUp(0) )
+		{
+			lastButtomPress = Time.time;
+			if(animation.clip.name != "shock")
+			{
+				if(UnityEngine.Random.Range(0,8) == 0)
+				{
+					animation.clip = animation["shock"].clip;
+					animation.CrossFade("shock");
+				}
+				else if(animation.clip.name != "run")
+				{
+					animation.clip = animation["run"].clip;
+					animation.CrossFade("run");
+				}
+			}
+		
+		}
+		else if(Time.time - lastButtomPress > 0.66f)
+		{
+			if(animation.clip.name != "Idle")
+			{
+				animation.CrossFade("Idle");
+				animation.clip = animation["Idle"].clip;
+			}
+			else if(!animation.isPlaying)
+				animation.Play ("Idle");
+		}
+		else if(animation.clip.name == "Idle")
+		{
+			animation.CrossFade("run");
+			animation.clip = animation["run"].clip;
+			
+		}
+		else if(!animation.isPlaying)
 			animation.Play ("run");
+
 		
 		float speed = m_heartBar.GetSpeed()*20f;
 		if(speed <= 0 && m_heartHightValue < .001f )
@@ -88,7 +152,6 @@ public class CharacterConnection : MonoBehaviour {
 			m_currentColor = m_StandardColor;
 		m_renderer.material.color = m_currentColor;
 	}
-	
 	/*	public void OnCollisionEnter (Collision hit)
 	{
 		if(hit.gameObject.name.Contains("Stampfer"))
@@ -100,25 +163,48 @@ public class CharacterConnection : MonoBehaviour {
 */	
 	public void OnTriggerEnter(Collider col)
 	{
+		if(col.gameObject.name.Contains ("Trap_Bridge"))
+			return;
+		
 		PlayerDeath();
-	}
-	
-	public void OnGUI()
-	{
-		if(m_playerDead)
-		{
-			if(GUI.Button (new Rect (50,50,200,100),"RESTART"))
-				Application.LoadLevel("runner 1");
-		}
 	}
 	
 	public void PlayerDeath()
 	{
 		m_playerDead = true;
 		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		
+		rigidbody.Sleep ();
 		// Play death sound.
 		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();
+		SaveHighscore((int)transform.position.x);
 	}
+	
+	public void SaveHighscore(int score)
+	{
+		int[] scoreArray = new int[5];
+		int TopPlace = -1;
+		for(int i=0;i<5;i++)
+		{
+			scoreArray[i] = PlayerPrefs.GetInt("highscore_values_"+i.ToString ());
+			if(score > scoreArray[i] && TopPlace < 0)
+				TopPlace = i;
+		}
+		
+		int tmpPlace = score;
+		if(TopPlace >= 0)
+		{
+			for(int i=0;i<5;i++)
+			{
+				if(i >= TopPlace)
+				{
+					int tmp = scoreArray[i];
+					scoreArray[i] = tmpPlace;
+					tmpPlace = tmp;
+					PlayerPrefs.SetInt("highscore_values_"+i.ToString(),scoreArray[i]);
+				}
+			}
+		}
+			
+	}	
 }
