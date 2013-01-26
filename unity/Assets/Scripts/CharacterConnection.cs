@@ -43,6 +43,15 @@ public class CharacterConnection : MonoBehaviour {
 		rigidbody.Sleep();
 	}
 	
+	public float GetDeathTimers()
+	{
+		if(m_heartHightValue > 0)
+			return m_heartHightValue;
+		else if(m_lowTimer > 0)
+			return - m_lowTimer;
+		else return 0;
+	}
+	
 	// Update is called once per frame
 	void Update () 
 	{
@@ -71,7 +80,6 @@ public class CharacterConnection : MonoBehaviour {
 			{
 				if(UnityEngine.Random.Range(0,8) == 0)
 				{
-					Debug.LogError ("play shock");
 					animation.clip = animation["shock"].clip;
 					animation.CrossFade("shock");
 				}
@@ -144,7 +152,6 @@ public class CharacterConnection : MonoBehaviour {
 			m_currentColor = m_StandardColor;
 		m_renderer.material.color = m_currentColor;
 	}
-	
 	/*	public void OnCollisionEnter (Collision hit)
 	{
 		if(hit.gameObject.name.Contains("Stampfer"))
@@ -156,6 +163,9 @@ public class CharacterConnection : MonoBehaviour {
 */	
 	public void OnTriggerEnter(Collider col)
 	{
+		if(col.gameObject.name.Contains ("Trap_Bridge"))
+			return;
+		
 		PlayerDeath();
 	}
 	
@@ -163,7 +173,7 @@ public class CharacterConnection : MonoBehaviour {
 	{
 		m_playerDead = true;
 		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		
+		rigidbody.Sleep ();
 		// Play death sound.
 		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();
