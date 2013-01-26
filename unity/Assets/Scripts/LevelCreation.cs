@@ -58,9 +58,12 @@ public class LevelCreation : MonoBehaviour {
 			CheckNewTileType();
 		
 		GameObject go = Instantiate(m_Ground[groundIndex]) as GameObject;
+		//GameObject go = Instantiate(m_Bridge) as GameObject;
 		go.transform.position = lastGroundPos;
 		m_groundObjectList.Add (go);
+		//lastGroundPos = go.transform.Find ("End").position;
 		
+		//return;
 		
 		if(groundIndex == 0)
 		{
@@ -110,23 +113,30 @@ public class LevelCreation : MonoBehaviour {
 	}
 	
 	private void CreateBridge( Vector3 pos ) {
+		GameObject go = Instantiate( m_Bridge ) as GameObject;
+		go.transform.position = pos;
+		nextObjectPosition = pos + new Vector3(Random.Range(5,objectDistance),0,0);
+		objectCount++;
+		if(objectDistance > 10)
+			objectDistance -= 0.5f;
+		m_objectList.Add (go);
 	}
 		
 	private Stampfer CreateStampfer(Vector3 pos, float stampTime = -1f)
 	{
-			//GameObject go = ObjectPool.Instance.SetObject(m_Stampfer,pos + new Vector3 (0,0,2));
-			GameObject go = Instantiate(m_Stampfer) as GameObject;
-			go.transform.position = pos;
-			nextObjectPosition = pos + new Vector3(Random.Range(5,objectDistance),0,0);
-			objectCount++;
-			if(objectDistance > 10)
-				objectDistance -= 0.5f;
-			m_objectList.Add (go);
-			if(stampTime < 0)
-				stampTime = UnityEngine.Random.Range (0f,3.5f);
-			Stampfer stampfer = go.GetComponent<Stampfer>();
-			stampfer.Init (stampTime);
-			return stampfer;
+		//GameObject go = ObjectPool.Instance.SetObject(m_Stampfer,pos + new Vector3 (0,0,2));
+		GameObject go = Instantiate(m_Stampfer) as GameObject;
+		go.transform.position = pos;
+		nextObjectPosition = pos + new Vector3(Random.Range(5,objectDistance),0,0);
+		objectCount++;
+		if(objectDistance > 10)
+			objectDistance -= 0.5f;
+		m_objectList.Add (go);
+		if(stampTime < 0)
+			stampTime = UnityEngine.Random.Range (0f,3.5f);
+		Stampfer stampfer = go.GetComponent<Stampfer>();
+		stampfer.Init (stampTime);
+		return stampfer;
 	}
 	
 	private void CreateStomperRow(Vector3 pos)
