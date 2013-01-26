@@ -4,6 +4,7 @@ using System.Collections;
 public class SoundManager : MonoBehaviour {
 	
 	[SerializeField]AudioSource m_Source;
+	[SerializeField]AudioSource m_FrankSource;
 	
 	[SerializeField]AudioClip m_MainTheme;
 	[SerializeField]AudioClip m_GameTheme;

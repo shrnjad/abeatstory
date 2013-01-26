@@ -114,5 +114,7 @@ public class CharacterConnection : MonoBehaviour {
 	{
 		m_playerDead = true;
 		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		
+		// Play death sound.
 	}
 }
