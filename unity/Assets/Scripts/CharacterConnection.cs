@@ -25,6 +25,8 @@ public class CharacterConnection : MonoBehaviour {
 	private static CharacterConnection _instance;
 	public static CharacterConnection Instance {get {return _instance; }}
 	
+	[SerializeField]Renderer m_renderer;
+	
 	public void Awake()
 	{
 		_instance = this;
@@ -40,6 +42,9 @@ public class CharacterConnection : MonoBehaviour {
 			return;
 #endif			
 		}
+		if(!animation.isPlaying)
+			animation.Play ("run");
+		
 		float speed = m_heartBar.GetSpeed()*20f;
 		if(speed <= 0 && m_heartHightValue < .001f )
 			m_lowTimer+= Time.deltaTime;
@@ -52,14 +57,15 @@ public class CharacterConnection : MonoBehaviour {
 		// Increase high death risk.
 		float relativeSpeed = m_heartBar.GetSpeed() / m_heartBar.maxValue;
 		if ( relativeSpeed > .5f ) {
-			m_heartHightValue += m_HeartHighAdd;
+			m_heartHightValue += Time.deltaTime;
 			// Cap at 1.
 			m_heartHightValue = Mathf.Min( 1, m_heartHightValue );
 		} else {
 			// Heal the heart.
-			m_heartHightValue -= m_HeartHighCooldown;
+			m_heartHightValue -= Time.deltaTime;
 			// Cap at 0.
 			m_heartHightValue = Mathf.Max( 0, m_heartHightValue );
+			//m_heartHightValue = 0f;
 		}
 
 		if(m_lowTimer > 0)
@@ -77,7 +83,7 @@ public class CharacterConnection : MonoBehaviour {
 		}
 		else 
 			m_currentColor = m_StandardColor;
-		renderer.material.color = m_currentColor;
+		m_renderer.material.color = m_currentColor;
 	}
 	
 	/*	public void OnCollisionEnter (Collision hit)
