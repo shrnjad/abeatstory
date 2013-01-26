@@ -1,0 +1,6 @@
+Trap_Stampfer
+
+Anims:
+
+0-34 down
+34-50 up

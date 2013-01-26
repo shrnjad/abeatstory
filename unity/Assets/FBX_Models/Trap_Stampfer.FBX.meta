@@ -38,7 +38,7 @@ ModelImporter:
     4300008: Wood_Beam_A004
     4300010: Wood_Beam_A005
     4300012: Wood_Beam_A
-    7400000: Down
+    7400000: down
     7400002: up
     9500000: //RootNode
     11100000: //RootNode
@@ -55,10 +55,10 @@ ModelImporter:
     animationScaleError: .300000012
     animationWrapMode: 0
     clipAnimations:
-    - name: Down
+    - name: down
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 34
       wrapMode: 8
       orientationOffsetY: 0
       level: 0
@@ -79,8 +79,8 @@ ModelImporter:
       skeletonMaskElements: []
     - name: up
       takeName: Take 001
-      firstFrame: 40
-      lastFrame: 55
+      firstFrame: 34
+      lastFrame: 50.0000038
       wrapMode: 8
       orientationOffsetY: 0
       level: 0
