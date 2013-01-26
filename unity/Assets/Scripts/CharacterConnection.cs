@@ -1,4 +1,4 @@
-#define CHEAT
+//#define CHEAT
 
 using UnityEngine;
 using System.Collections;
