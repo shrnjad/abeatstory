@@ -61,7 +61,6 @@ public class CharacterConnection : MonoBehaviour {
 			// Cap at 0.
 			m_heartHightValue = Mathf.Max( 0, m_heartHightValue );
 		}
-		Debug.Log( "" + m_heartHightValue );
 
 		if(m_lowTimer > 0)
 		{
