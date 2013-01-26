@@ -18,6 +18,9 @@ public class CharacterConnection : MonoBehaviour {
 	Color m_currentColor;
 	float m_lowTimer=0f;
 	
+	[SerializeField] float m_HeartHighCooldown = .001f;
+	[SerializeField] float m_HeartHighAdd = .05f;
+	private float m_heartHightValue = 0;
 	
 	private static CharacterConnection _instance;
 	public static CharacterConnection Instance {get {return _instance; }}
@@ -38,7 +41,7 @@ public class CharacterConnection : MonoBehaviour {
 #endif			
 		}
 		float speed = m_heartBar.GetSpeed()*20f;
-		if(speed <= 0)
+		if(speed <= 0 && m_heartHightValue < .001f )
 			m_lowTimer+= Time.deltaTime;
 		else 
 			m_lowTimer =0;
@@ -46,11 +49,32 @@ public class CharacterConnection : MonoBehaviour {
 		m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
 		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
 		
+		// Increase high death risk.
+		float relativeSpeed = m_heartBar.GetSpeed() / m_heartBar.maxValue;
+		if ( relativeSpeed > .5f ) {
+			m_heartHightValue += m_HeartHighAdd;
+			// Cap at 1.
+			m_heartHightValue = Mathf.Min( 1, m_heartHightValue );
+		} else {
+			// Heal the heart.
+			m_heartHightValue -= m_HeartHighCooldown;
+			// Cap at 0.
+			m_heartHightValue = Mathf.Max( 0, m_heartHightValue );
+		}
+		Debug.Log( "" + m_heartHightValue );
+
 		if(m_lowTimer > 0)
 		{
 			if(m_lowTimer >= 1)
 				m_playerDead = true;
-			m_currentColor = Color.Lerp (m_StandardColor,m_LowColor,m_lowTimer);
+			m_currentColor = Color.Lerp (m_StandardColor, m_LowColor, m_lowTimer);
+		}
+		else if ( m_heartHightValue > 0 )
+		{
+			// Set high risk color.
+			m_currentColor = Color.Lerp( m_StandardColor, m_HighColor, m_heartHightValue );
+			
+			if ( m_heartHightValue > .999f ) m_playerDead = true;
 		}
 		else 
 			m_currentColor = m_StandardColor;
