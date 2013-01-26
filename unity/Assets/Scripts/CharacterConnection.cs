@@ -115,5 +115,34 @@ public class CharacterConnection : MonoBehaviour {
 		// Play death sound.
 		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();
+		SaveHighscore((int)transform.position.x);
 	}
+	
+	public void SaveHighscore(int score)
+	{
+		int[] scoreArray = new int[5];
+		int TopPlace = -1;
+		for(int i=0;i<5;i++)
+		{
+			scoreArray[i] = PlayerPrefs.GetInt("highscore_values_"+i.ToString ());
+			if(score > scoreArray[i] && TopPlace < 0)
+				TopPlace = i;
+		}
+		
+		int tmpPlace = score;
+		if(TopPlace >= 0)
+		{
+			for(int i=0;i<5;i++)
+			{
+				if(i >= TopPlace)
+				{
+					int tmp = scoreArray[i];
+					scoreArray[i] = tmpPlace;
+					tmpPlace = tmp;
+					PlayerPrefs.SetInt("highscore_values_"+i.ToString(),scoreArray[i]);
+				}
+			}
+		}
+			
+	}	
 }
