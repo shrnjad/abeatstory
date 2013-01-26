@@ -38,6 +38,7 @@ ModelImporter:
     4300008: Wood_Beam_A004
     4300010: Wood_Beam_A005
     4300012: Wood_Beam_A
+    4300014: Trap_Stampfer
     7400000: down
     7400002: up
     9500000: //RootNode
@@ -58,7 +59,7 @@ ModelImporter:
     - name: down
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 34
+      lastFrame: 35
       wrapMode: 8
       orientationOffsetY: 0
       level: 0
@@ -79,7 +80,7 @@ ModelImporter:
       skeletonMaskElements: []
     - name: up
       takeName: Take 001
-      firstFrame: 34
+      firstFrame: 35
       lastFrame: 50.0000038
       wrapMode: 8
       orientationOffsetY: 0

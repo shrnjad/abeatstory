@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 3530251b81b99cc489f60bb560a1c379
+guid: 8adf4105dd648e24e9146295daabac94
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: End
-    100002: //RootNode
-    100004: Street_Straight
-    400000: End
-    400002: //RootNode
-    400004: Street_Straight
+    100000: //RootNode
+    400000: //RootNode
     2300000: //RootNode
-    2300002: Street_Straight
     3300000: //RootNode
-    3300002: Street_Straight
-    4300000: Street_Straight
+    4300000: Wall_Lamp
     9500000: //RootNode
   materials:
     importMaterials: 1
