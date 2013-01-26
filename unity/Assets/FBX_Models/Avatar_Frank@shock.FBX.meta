@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ea5072f9037d85c4384b2ec25fe6aa7a
+guid: aec6128d6a9332c4e8d11dab0d0c827d
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -121,8 +121,6 @@ ModelImporter:
     400112: Base HumanSpine3
     400114: Base HumanSpine4
     400116: Frank
-    2300000: //RootNode
-    3300000: //RootNode
     4300000: Frank
     7400000: Take 001
     9500000: //RootNode
@@ -139,7 +137,7 @@ ModelImporter:
     animationRotationError: .300000012
     animationPositionError: .300000012
     animationScaleError: .300000012
-    animationWrapMode: 0
+    animationWrapMode: 2
     clipAnimations: []
     isReadable: 1
   meshes:
