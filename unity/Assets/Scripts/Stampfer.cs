@@ -4,19 +4,24 @@ using System.Collections;
 
 public class Stampfer : MonoBehaviour {
 	
-	Rigidbody m_Rigidbody;
 	Vector3 startPos;
 	float m_stampTime = 3.5f;
 	float m_currentStampTime;
 	CharacterConnection m_Character;
 	[SerializeField]Animation m_Animation;
 	
-	public void Init()
+	public void Init(float stampOffset)
 	{
-		//m_Rigidbody = GetComponent<Rigidbody>();
+		m_Animation.Play("up");
 		startPos = transform.position;
-		m_currentStampTime = UnityEngine.Random.Range (0,m_stampTime);
+		m_stampTime = stampOffset;
+		m_currentStampTime = stampOffset;
 		this.enabled = true;
+	}
+	
+	public void DelayStomp(float delay)
+	{
+		m_currentStampTime += delay;
 	}
 	
 	public void Update()
@@ -25,7 +30,6 @@ public class Stampfer : MonoBehaviour {
 		if(m_currentStampTime < 0)
 		{
 			m_currentStampTime = m_stampTime;
-			//m_Rigidbody.useGravity = true;
 			m_Animation.Play ("down");
 			StartCoroutine (MoveBackToStartposition());
 		}
@@ -55,18 +59,10 @@ public class Stampfer : MonoBehaviour {
 		{
 			yield return null;
 		}while(m_Animation.isPlaying);
-		//yield return new WaitForSeconds(1.5f);
+		
 		if(m_Animation != null)
 			m_Animation.Play ("up");
-		
-		/*do
-		{
-			yield return null;
-			transform.position = Vector3.MoveTowards(transform.position,startPos,2f);
-		}while(transform.position != startPos);
-		//if(m_Rigidbody != null)
-		//	m_Rigidbody.useGravity = false;
-		*/
+
 	}
 	
 	public void OnDestroy()
