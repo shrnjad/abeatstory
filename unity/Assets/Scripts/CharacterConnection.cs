@@ -28,6 +28,8 @@ public class CharacterConnection : MonoBehaviour {
 	public static CharacterConnection Instance {get {return _instance; }}
 	
 	[SerializeField]Renderer m_renderer;
+	private float lastButtomPress;
+	private bool started = false;
 	
 	public bool isAlive {
 		get { return !m_playerDead; }
@@ -36,10 +38,24 @@ public class CharacterConnection : MonoBehaviour {
 	public void Awake()
 	{
 		_instance = this;
+		transform.Translate(0,-1.8f,0);
+		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
+		rigidbody.Sleep();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		if(!started)
+		{
+			if(Input.GetMouseButtonUp(0))
+			{
+				rigidbody.WakeUp ();
+				started = true;
+			}
+			return;
+		}
+		
 		if(m_playerDead)
 		{
 #if CHEAT 
@@ -48,8 +64,44 @@ public class CharacterConnection : MonoBehaviour {
 			return;
 #endif			
 		}
-		if(!animation.isPlaying)
+		if(Input.GetMouseButtonUp(0) )
+		{
+			lastButtomPress = Time.time;
+			if(animation.clip.name != "shock")
+			{
+				if(UnityEngine.Random.Range(0,8) == 0)
+				{
+					Debug.LogError ("play shock");
+					animation.clip = animation["shock"].clip;
+					animation.CrossFade("shock");
+				}
+				else if(animation.clip.name != "run")
+				{
+					animation.clip = animation["run"].clip;
+					animation.CrossFade("run");
+				}
+			}
+		
+		}
+		else if(Time.time - lastButtomPress > 0.66f)
+		{
+			if(animation.clip.name != "Idle")
+			{
+				animation.CrossFade("Idle");
+				animation.clip = animation["Idle"].clip;
+			}
+			else if(!animation.isPlaying)
+				animation.Play ("Idle");
+		}
+		else if(animation.clip.name == "Idle")
+		{
+			animation.CrossFade("run");
+			animation.clip = animation["run"].clip;
+			
+		}
+		else if(!animation.isPlaying)
 			animation.Play ("run");
+
 		
 		float speed = m_heartBar.GetSpeed()*20f;
 		if(speed <= 0 && m_heartHightValue < .001f )
