@@ -8,8 +8,12 @@ public class BuzzSawScript : MonoBehaviour {
 	float current;
 	Collider[] col;
 	bool checkToDeactivate = false;
+	public ParticleSystem particle;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
+		animation["Take 001"].wrapMode = WrapMode.Once;
+		animation["Take 001"].speed = 1.5f;
 		col = (Collider[]) gameObject.GetComponentsInChildren<Collider>() ; 
 		foreach(Collider c in  col)
 			c.enabled = false;
@@ -33,12 +37,17 @@ public class BuzzSawScript : MonoBehaviour {
 				checkToDeactivate = false;
 				foreach(Collider c in col)
 					c.enabled = false;
-				animation.Rewind();
+				animation["Take 001"].time =0;
 			}
 		}
 		current -= Time.deltaTime;
+		if(current < 1 && !particle.enableEmission)
+		{
+			particle.enableEmission = true;
+		}
 		if(current < 0)
 		{
+			particle.enableEmission = false;
 			animation.Play ();
 			current = sawCycle;
 			if (col != null)

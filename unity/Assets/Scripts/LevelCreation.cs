@@ -148,7 +148,7 @@ public class LevelCreation : MonoBehaviour {
 			objectDistance -= 0.5f;
 		m_objectList.Add (go);
 		if(stampTime < 0)
-			stampTime = UnityEngine.Random.Range (2f,5f);
+			stampTime = UnityEngine.Random.Range (3f,6f);
 		BuzzSawScript stampfer = go.GetComponent<BuzzSawScript>();
 		stampfer.Init (stampTime);
 		return stampfer;
