@@ -124,6 +124,7 @@ ModelImporter:
     4300000: Frank
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Frank
   materials:
     importMaterials: 1
@@ -133,9 +134,9 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: .300000012
+    animationPositionError: .300000012
+    animationScaleError: .300000012
     animationWrapMode: 0
     clipAnimations: []
     isReadable: 1
@@ -173,5 +174,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   additionalBone: 1
-  animationType: 2
+  animationType: 1
   userData: 
