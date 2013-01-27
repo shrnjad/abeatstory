@@ -11,6 +11,7 @@ public class LevelCreation : MonoBehaviour {
 	[SerializeField] GameObject m_Bridge;
 	[SerializeField] GameObject[] m_Ground;
 	[SerializeField] GameObject[] m_Background;
+	[SerializeField] GameObject[] m_WallTiles;
 	
 	List<GameObject> m_objectList = new List<GameObject>();
 	List<GameObject> m_groundObjectList = new List<GameObject>();
@@ -50,23 +51,6 @@ public class LevelCreation : MonoBehaviour {
 
 	}
 	
-	private void CreateBackground()
-	{
-		GameObject go = Instantiate (m_Background[0]) as GameObject;
-		go.transform.position = lastBackgroundPosition;
-		lastBackgroundPosition = go.transform.Find ("End").position;
-		m_backgroundObjectList.Add (go);
-		
-		GameObject detailGo;
-		int index = Random.Range(0,100)%10+1;
-		if(index < m_Background.Length)
-		{
-			detailGo = GameObject.Instantiate(m_Background[index]) as GameObject;
-			detailGo.transform.position = go.transform.position;
-			m_backgroundObjectList.Add (detailGo);
-		}
-	}
-	
 	private void CreateGround()
 	{
 		if(tilesTillNextPartCheck <=0)
@@ -91,7 +75,7 @@ public class LevelCreation : MonoBehaviour {
 		
 		if(groundIndex == 0)
 		{
-			GameObject goBack = Instantiate (m_Background[0]) as GameObject;
+			GameObject goBack = Instantiate (m_WallTiles[0]) as GameObject;
 			goBack.transform.position = lastGroundPos;
 			//lastBackgroundPosition = go.transform.Find ("End").position;
 			m_backgroundObjectList.Add (goBack);
