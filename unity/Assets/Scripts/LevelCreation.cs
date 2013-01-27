@@ -97,10 +97,10 @@ public class LevelCreation : MonoBehaviour {
 		{
 			if(tilesTillNextPartCheck > 4 && Random.Range(0,3) == 0)
 				CreateStomperRow(lastGroundPos);
-			else 
-				
+			else if(Random.Range (0,100) < 50)
 				CreateBuzzSaw(lastGroundPos);
-				//CreateStampfer (lastGroundPos);
+			else 
+				CreateStampfer (lastGroundPos);
 		}
 	}
 	
