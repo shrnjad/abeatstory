@@ -1,4 +1,4 @@
-#define CHEAT
+//#define CHEAT
 
 using UnityEngine;
 using System.Collections;
@@ -34,6 +34,8 @@ public class CharacterConnection : MonoBehaviour {
 	[SerializeField] ParticleSystem m_ParticleSystem;
 	[SerializeField] ParticleSystem BloodSplatterParticleSystem;
 	
+	float lastFrameTime=0;
+	
 	public bool isAlive {
 		get { return !m_playerDead; }
 	}
@@ -58,6 +60,11 @@ public class CharacterConnection : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(rigidbody)
+			Debug.Log ("char pos " + transform.position + "   rigi vel " + rigidbody.velocity);
+		else 
+			Debug.Log ("char pos " + transform.position);
+		
 		if(!started)
 		{
 			if(Input.GetMouseButtonUp(0))
@@ -70,6 +77,7 @@ public class CharacterConnection : MonoBehaviour {
 		
 		if(m_playerDead)
 		{
+			//UpdateDeathAnimation();
 #if CHEAT 
 			m_playerDead = false;
 #else 
@@ -116,13 +124,12 @@ public class CharacterConnection : MonoBehaviour {
 		else if(!animation.isPlaying)
 			animation.Play ("run");
 
-		
 		float speed = m_heartBar.GetSpeed()*20f;
 		if(speed <= 0 && m_heartHightValue < .001f )
 			m_lowTimer+= Time.deltaTime;
 		else 
 			m_lowTimer =0;
-		m_character.SimpleMove(new Vector3(speed*Time.deltaTime,-100,0));
+		m_character.SimpleMove(new Vector3(speed*Time.deltaTime,0,0));
 		m_DistanceText.text = m_character.transform.position.x.ToString (".0") + " m";
 		m_heartBar.gameObject.transform.position = transform.position - new Vector3(-7,-3,10);
 		
@@ -158,15 +165,18 @@ public class CharacterConnection : MonoBehaviour {
 			m_currentColor = m_StandardColor;
 		m_renderer.material.color = m_currentColor;
 	}
-	/*	public void OnCollisionEnter (Collision hit)
+
+	private void UpdateDeathAnimation()
 	{
-		if(hit.gameObject.name.Contains("Stampfer"))
-		{
-			Debug.Log ("char hit by " + hit.gameObject.name);
-			m_playerDead = true;
-		}
+		//animation.Stop ();
+		//animation["Die"].length += lastFrameTime;
+		animation.clip = animation["Die"].clip;
+		
+		animation["Die"].time += lastFrameTime;
+		animation.Play ();
 	}
-*/	
+	
+	
 	public void OnTriggerEnter(Collider col)
 	{
 		if(col.gameObject.name.Contains ("Trap_Bridge"))
@@ -177,9 +187,18 @@ public class CharacterConnection : MonoBehaviour {
 	
 	public void PlayerDeath()
 	{
+		if(m_playerDead)
+			return;
+		lastFrameTime = Time.deltaTime;
+		//Time.timeScale = 0f;
+		
+		
 		m_playerDead = true;
-		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		rigidbody.Sleep ();
+		rigidbody.velocity = Vector3.zero;
+		
+		Destroy (rigidbody);
+		//rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		//rigidbody.Sleep ();
 		// Play death sound.
 		SoundManager.Instance.PlaySound( m_dieClip );
 		SoundManager.Instance.StopMusic();

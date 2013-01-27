@@ -17,7 +17,8 @@ public class SoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		//PlayerPrefs.DeleteAll();
-
+		Time.timeScale = 1f;
+		
 		_instance = this;
 		DontDestroyOnLoad(gameObject);
 		SwitchToMenuTheme();
