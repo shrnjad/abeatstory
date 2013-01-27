@@ -1,37 +1,76 @@
 fileFormatVersion: 2
-guid: 456edaa302cdc7945a0e70cf91cdae4b
+guid: b8dd25476f086c04f9db9fb88d3961be
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: Box034
-    100002: End
-    100004: L-Ext001
-    100006: L-Ext002
-    100008: Loft001
-    100010: Start
-    100012: //RootNode
+    100002: Box035
+    100004: Box036
+    100006: End
+    100008: L-Ext001
+    100010: L-Ext002
+    100012: L-Ext003
+    100014: L-Ext004
+    100016: L-Ext005
+    100018: L-Ext006
+    100020: Loft001
+    100022: Loft002
+    100024: Loft003
+    100026: Start
+    100028: //RootNode
     400000: Box034
-    400002: End
-    400004: L-Ext001
-    400006: L-Ext002
-    400008: Loft001
-    400010: Start
-    400012: //RootNode
+    400002: Box035
+    400004: Box036
+    400006: End
+    400008: L-Ext001
+    400010: L-Ext002
+    400012: L-Ext003
+    400014: L-Ext004
+    400016: L-Ext005
+    400018: L-Ext006
+    400020: Loft001
+    400022: Loft002
+    400024: Loft003
+    400026: Start
+    400028: //RootNode
     2300000: Box034
-    2300002: L-Ext001
-    2300004: L-Ext002
-    2300006: Loft001
+    2300002: Box035
+    2300004: Box036
+    2300006: L-Ext001
+    2300008: L-Ext002
+    2300010: L-Ext003
+    2300012: L-Ext004
+    2300014: L-Ext005
+    2300016: L-Ext006
+    2300018: Loft001
+    2300020: Loft002
+    2300022: Loft003
     3300000: Box034
-    3300002: L-Ext001
-    3300004: L-Ext002
-    3300006: Loft001
+    3300002: Box035
+    3300004: Box036
+    3300006: L-Ext001
+    3300008: L-Ext002
+    3300010: L-Ext003
+    3300012: L-Ext004
+    3300014: L-Ext005
+    3300016: L-Ext006
+    3300018: Loft001
+    3300020: Loft002
+    3300022: Loft003
     4300000: L-Ext002
     4300002: L-Ext001
     4300004: Box034
     4300006: Loft001
+    4300008: L-Ext003
+    4300010: L-Ext004
+    4300012: Box035
+    4300014: Loft002
+    4300016: L-Ext005
+    4300018: L-Ext006
+    4300020: Box036
+    4300022: Loft003
     7400000: Take 001
     9500000: //RootNode
-    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -80,5 +119,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   additionalBone: 1
-  animationType: 1
+  animationType: 2
   userData: 
