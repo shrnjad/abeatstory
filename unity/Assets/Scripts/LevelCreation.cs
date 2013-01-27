@@ -6,6 +6,8 @@ public class LevelCreation : MonoBehaviour {
 	
 	[SerializeField] Transform m_Player;
 	[SerializeField] GameObject m_Stampfer;
+	[SerializeField] GameObject m_Saw;
+	
 	[SerializeField] GameObject m_Bridge;
 	[SerializeField] GameObject[] m_Ground;
 	[SerializeField] GameObject[] m_Background;
@@ -95,6 +97,8 @@ public class LevelCreation : MonoBehaviour {
 		{
 			if(tilesTillNextPartCheck > 4 && Random.Range(0,3) == 0)
 				CreateStomperRow(lastGroundPos);
+			else if(Random.Range (0,100) < 50)
+				CreateBuzzSaw(lastGroundPos);
 			else 
 				CreateStampfer (lastGroundPos);
 		}
@@ -134,6 +138,23 @@ public class LevelCreation : MonoBehaviour {
 		m_objectList.Add (go);
 	}
 		
+	private BuzzSawScript CreateBuzzSaw(Vector3 pos, float stampTime = -1f)
+	{
+		GameObject go = Instantiate(m_Saw) as GameObject;
+		go.transform.position = pos;
+		nextObjectPosition = pos + new Vector3(Random.Range(5,objectDistance),0,0);
+		objectCount++;
+		if(objectDistance > 10)
+			objectDistance -= 0.5f;
+		m_objectList.Add (go);
+		if(stampTime < 0)
+			stampTime = UnityEngine.Random.Range (3f,6f);
+		BuzzSawScript stampfer = go.GetComponent<BuzzSawScript>();
+		stampfer.Init (stampTime);
+		return stampfer;
+	}
+
+	
 	private Stampfer CreateStampfer(Vector3 pos, float stampTime = -1f)
 	{
 		//GameObject go = ObjectPool.Instance.SetObject(m_Stampfer,pos + new Vector3 (0,0,2));

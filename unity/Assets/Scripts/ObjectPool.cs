@@ -58,7 +58,7 @@ public class ObjectPool : MonoBehaviour {
 			List<GameObject> list;
 			if(!m_activePool.TryGetValue(type,out list))
 				Debug.LogError ("error - listshould always be in dictionary");
-			
+	
 			for(int i=list.Count-1;i>=0;i--)
 			{
 				if(list[i].transform.position.x +30 < charPos.x)

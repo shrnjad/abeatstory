@@ -23,6 +23,7 @@ public class CharacterConnection : MonoBehaviour {
 	private float m_heartHightValue = 0;
 	
 	[SerializeField] AudioClip m_dieClip;
+	[SerializeField] AudioClip m_heartBeatClip;
 	
 	private static CharacterConnection _instance;
 	public static CharacterConnection Instance {get {return _instance; }}
@@ -92,7 +93,9 @@ public class CharacterConnection : MonoBehaviour {
 					animation.CrossFade("run");
 				}
 			}
-		
+			
+			// Play heaartbeat sound.
+			
 		}
 		else if(Time.time - lastButtomPress > 0.66f)
 		{
