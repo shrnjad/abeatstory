@@ -25,6 +25,9 @@ public class LevelCreation : MonoBehaviour {
 	Vector3 lastBackgroundPosition;
 	int groundIndex;
 	int tilesTillNextPartCheck;
+	
+	int m_wallTileInd = 0;
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -75,10 +78,11 @@ public class LevelCreation : MonoBehaviour {
 		
 		if(groundIndex == 0)
 		{
-			GameObject goBack = Instantiate (m_WallTiles[0]) as GameObject;
+			GameObject goBack = Instantiate (m_WallTiles[m_wallTileInd%m_WallTiles.Length]) as GameObject;
 			goBack.transform.position = lastGroundPos;
 			//lastBackgroundPosition = go.transform.Find ("End").position;
 			m_backgroundObjectList.Add (goBack);
+			++m_wallTileInd;
 			
 			GameObject detailGo;
 			int index = Random.Range(0,100)%10+1;
