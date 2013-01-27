@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 	{
 		SoundManager.Instance.SwitchToGameTheme();
 
-		Application.LoadLevel ("runner 1");
+		Application.LoadLevel ("Game");
 	}
 	
 	public void LoadHighscores()

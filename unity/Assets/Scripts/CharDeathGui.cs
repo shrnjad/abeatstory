@@ -39,11 +39,13 @@ public class CharDeathGui : MonoBehaviour {
 	}	
 	
 	public void Restart() {
-		Application.LoadLevel("runner 1");
+		Application.LoadLevel("Game");
+		SoundManager.Instance.SwitchToGameTheme();
 	}
 	
 	public void Quit() {
 		Application.LoadLevel("Menu");
+		SoundManager.Instance.SwitchToMenuTheme();
 	}
 
 }

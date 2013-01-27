@@ -18,7 +18,7 @@ public class FlickerLight : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		current += delta*Time.deltaTime*Random.Range (0.5f,2f);
+		current += delta*Time.deltaTime*3*Random.Range (0.5f,2f);
 		if(current > ToValue && delta > 0)
 			delta = -delta;
 		else if(current < FromValue && delta < 0)

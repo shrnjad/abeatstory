@@ -31,6 +31,7 @@ public class CharacterConnection : MonoBehaviour {
 	private float lastButtomPress;
 	private bool started = false;
 	[SerializeField] ParticleSystem m_ParticleSystem;
+	[SerializeField] ParticleSystem BloodSplatterParticleSystem;
 	
 	public bool isAlive {
 		get { return !m_playerDead; }
@@ -181,6 +182,8 @@ public class CharacterConnection : MonoBehaviour {
 		SoundManager.Instance.StopMusic();
 		animation.CrossFade ("Die");
 		SaveHighscore((int)transform.position.x);
+		BloodSplatterParticleSystem.Play();
+		
 	}
 	
 	public void SaveHighscore(int score)
